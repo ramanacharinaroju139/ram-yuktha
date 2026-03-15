@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Our Engagement</title>
+
+<style>
+body{
+font-family:Arial;
+text-align:center;
+background:#fff5f7;
+}
+
+.header{
+padding:60px;
+background:#ffccd5;
+}
+
+.section{
+padding:40px;
+}
+
+.countdown{
+font-size:30px;
+color:#d6336c;
+}
+
+.gallery img{
+width:200px;
+margin:10px;
+border-radius:10px;
+}
+
+button{
+padding:10px 20px;
+background:#d6336c;
+color:white;
+border:none;
+border-radius:5px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+<h1>Ram ❤️ Yuktha</h1>
+<h2>We're Getting Engaged!</h2>
+<h3>April 12, 2026 | 6:00 PM</h3>
+</div>
+
+<div class="section">
+<h2>Countdown</h2>
+<div id="countdown" class="countdown"></div>
+</div>
+
+<div class="section gallery">
+<h2>Our Photos</h2>
+<img src="photo1.jpg">
+<img src="photo2.jpg">
+</div>
+
+<div class="section">
+<h2>Venue</h2>
+<p>Hotel Sindhu Towers</p>
+
+<a href="https://maps.app.goo.gl/Dyys4CopRbk1stgD9" target="_blank">
+<button>Open Location</button>
+</a>
+</div>
+
+<div class="section">
+<h2>RSVP</h2>
+
+<form action="https://formspree.io/f/mzdjakoe" method="POST">
+
+<input type="text" name="name" placeholder="Your Name" required><br><br>
+
+<select name="attending">
+<option>Will Attend</option>
+<option>Can't Attend</option>
+</select><br><br>
+
+<button type="submit">Submit</button>
+
+</form>
+
+</div>
+
+<audio autoplay loop>
+<source src="music.mp3" type="audio/mp3">
+</audio>
+
+<script>
+
+var countDownDate = new Date("Apr 12, 2026 18:00:00").getTime();
+
+var x = setInterval(function() {
+
+var now = new Date().getTime();
+
+var distance = countDownDate - now;
+
+var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+document.getElementById("countdown").innerHTML =
+days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+}, 1000);
+
+</script>
+
+</body>
+</html>
