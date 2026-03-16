@@ -1,88 +1,184 @@
+```html
 <!DOCTYPE html>
 <html>
 <head>
-<title>Our Engagement</title>
+<title>Ram & Yuktha Engagement</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
+
 body{
-font-family:Arial;
+margin:0;
+font-family:'Poppins',sans-serif;
 text-align:center;
-background:#fff5f7;
+background:linear-gradient(to bottom,#fff0f5,#ffe4e1);
+color:#333;
 }
 
 .header{
-padding:60px;
-background:#ffccd5;
+padding:80px 20px;
+}
+
+.header h1{
+font-family:'Playfair Display',serif;
+font-size:50px;
+color:#c2185b;
+margin-bottom:10px;
+}
+
+.header h2{
+font-size:28px;
+margin-bottom:5px;
+}
+
+.header h3{
+font-size:20px;
+color:#555;
 }
 
 .section{
-padding:40px;
+padding:50px 20px;
+max-width:900px;
+margin:auto;
+}
+
+.invite-text{
+font-size:18px;
+line-height:1.7;
 }
 
 .countdown{
-font-size:30px;
-color:#d6336c;
+font-size:32px;
+color:#c2185b;
+font-weight:bold;
+margin-top:20px;
+}
+
+.gallery{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:25px;
+margin-top:30px;
 }
 
 .gallery img{
-width:200px;
-margin:10px;
-border-radius:10px;
+width:300px;
+border-radius:15px;
+box-shadow:0 6px 16px rgba(0,0,0,0.2);
+}
+
+.event-box{
+background:white;
+padding:25px;
+border-radius:12px;
+box-shadow:0 4px 12px rgba(0,0,0,0.1);
+margin-top:20px;
 }
 
 button{
-padding:10px 20px;
-background:#d6336c;
+padding:14px 28px;
+font-size:16px;
+background:#c2185b;
 color:white;
 border:none;
-border-radius:5px;
+border-radius:8px;
+cursor:pointer;
+margin-top:10px;
 }
+
+button:hover{
+background:#880e4f;
+}
+
+.footer{
+margin-top:40px;
+padding:25px;
+font-size:16px;
+color:#555;
+}
+
 </style>
+
 </head>
 
 <body>
 
 <div class="header">
+
 <h1>Ram ❤️ Yuktha</h1>
-<h2>We're Getting Engaged!</h2>
-<h3>April 12, 2026 | 6:00 PM</h3>
+
+<h2>We're Getting Engaged</h2>
+
+<h3>April 12, 2026 • 6:00 PM</h3>
+
 </div>
 
 <div class="section">
-<h2>Countdown</h2>
+
+<h2>With the Blessings of Our Families</h2>
+
+<p class="invite-text">
+
+We are delighted to invite you to celebrate the engagement ceremony of  
+<b>Ram</b> and <b>Yuktha</b>.
+
+<br><br>
+
+Join us as we begin this beautiful journey together.  
+Your presence will make our celebration even more special.
+
+</p>
+
+</div>
+
+<div class="section">
+
+<h2>Countdown to Our Special Day</h2>
+
 <div id="countdown" class="countdown"></div>
-</div>
 
-<div class="section gallery">
-<h2>Our Photos</h2>
-<img src="photo1.jpeg">
-<img src="photo2.jpeg">
 </div>
 
 <div class="section">
-<h2>Venue</h2>
-<p>Hotel Sindhu Towers</p>
+
+<h2>Event Details</h2>
+
+<div class="event-box">
+
+<p><b>Date:</b> April 12, 2026</p>
+
+<p><b>Time:</b> 6:00 PM onwards</p>
+
+<p><b>Venue:</b> Hotel Sindhu Towers</p>
 
 <a href="https://maps.app.goo.gl/Dyys4CopRbk1stgD9" target="_blank">
-<button>Open Location</button>
+
+<button>View Location</button>
+
 </a>
+
+</div>
+
 </div>
 
 <div class="section">
-<h2>RSVP</h2>
 
-<form action="https://formspree.io/f/mzdjakoe" method="POST">
+<h2>Our Photos</h2>
 
-<input type="text" name="name" placeholder="Your Name" required><br><br>
+<div class="gallery">
 
-<select name="attending">
-<option>Will Attend</option>
-<option>Can't Attend</option>
-</select><br><br>
+<img src="photo1.jpeg">
+<img src="photo2.jpeg">
 
-<button type="submit">Submit</button>
+</div>
 
-</form>
+</div>
+
+<div class="footer">
+
+We look forward to celebrating this joyful occasion with you 💍
 
 </div>
 
@@ -106,7 +202,7 @@ var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
 document.getElementById("countdown").innerHTML =
-days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+days + " Days " + hours + " Hours " + minutes + " Minutes " + seconds + " Seconds ";
 
 }, 1000);
 
@@ -114,3 +210,4 @@ days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
 
 </body>
 </html>
+```
