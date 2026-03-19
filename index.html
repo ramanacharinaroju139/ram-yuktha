@@ -17,7 +17,56 @@ text-align:center;
 overflow-x:hidden;
 }
 
-/* HERO SECTION */
+/* INTRO */
+
+.intro{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:#0a1b3d;
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:1000;
+}
+
+.envelope{
+width:220px;
+height:140px;
+background:#FFD700;
+position:relative;
+cursor:pointer;
+border-radius:8px;
+}
+
+.flap{
+position:absolute;
+width:100%;
+height:100%;
+background:#e6c200;
+clip-path:polygon(0 0, 100% 0, 50% 50%);
+transform-origin:top;
+transition:1s;
+}
+
+.letter{
+position:absolute;
+top:20px;
+left:10px;
+width:200px;
+height:100px;
+background:white;
+color:black;
+display:flex;
+justify-content:center;
+align-items:center;
+font-weight:bold;
+transition:1s;
+}
+
+/* HERO */
 
 .hero{
 height:100vh;
@@ -27,6 +76,9 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 position:relative;
+transform:scale(1.2);
+opacity:0;
+transition:1s;
 }
 
 .names{
@@ -37,15 +89,11 @@ color:#FFD700;
 
 .subtitle{
 font-size:26px;
-margin-top:10px;
 }
 
 .date{
-margin-top:10px;
 font-size:20px;
 }
-
-/* RING */
 
 .ring{
 font-size:70px;
@@ -54,31 +102,23 @@ animation:spin 6s linear infinite;
 }
 
 @keyframes spin{
-0%{transform:rotate(0deg);}
 100%{transform:rotate(360deg);}
 }
 
-/* SCROLL ARROW */
+/* SCROLL */
 
 .scroll-down{
 position:absolute;
 bottom:20px;
 font-size:40px;
-color:white;
 animation:bounce 1.5s infinite;
 cursor:pointer;
 }
 
 @keyframes bounce{
-0%,20%,50%,80%,100%{
-transform:translateY(0);
-}
-40%{
-transform:translateY(10px);
-}
-60%{
-transform:translateY(5px);
-}
+0%,20%,50%,80%,100%{transform:translateY(0);}
+40%{transform:translateY(10px);}
+60%{transform:translateY(5px);}
 }
 
 /* SECTION */
@@ -94,7 +134,6 @@ margin:auto;
 .countdown{
 font-size:40px;
 color:#FFD700;
-margin-top:20px;
 }
 
 /* GALLERY */
@@ -104,43 +143,21 @@ display:flex;
 flex-wrap:wrap;
 justify-content:center;
 gap:25px;
-margin-top:30px;
 }
 
 .gallery img{
 width:300px;
 border-radius:15px;
-box-shadow:0 10px 30px rgba(0,0,0,0.6);
-transition:.4s;
 }
 
-.gallery img:hover{
-transform:scale(1.05);
-}
-
-/* EVENT CARD */
+/* CARD */
 
 .card{
 background:rgba(255,255,255,0.1);
 padding:30px;
 border-radius:15px;
-box-shadow:0 8px 25px rgba(0,0,0,0.6);
 max-width:400px;
 margin:auto;
-}
-
-/* MAP */
-
-iframe{
-border-radius:15px;
-margin-top:20px;
-}
-
-/* FOOTER */
-
-.footer{
-padding:40px;
-color:#ccc;
 }
 
 /* FLOWERS */
@@ -153,14 +170,24 @@ animation:fall linear infinite;
 }
 
 @keyframes fall{
-0%{
-transform:translateY(0);
-opacity:1;
+100%{transform:translateY(110vh);}
 }
-100%{
-transform:translateY(110vh);
-opacity:0;
+
+/* SPARKLES */
+
+.sparkle{
+position:fixed;
+width:5px;
+height:5px;
+background:white;
+border-radius:50%;
+opacity:0.8;
+animation:twinkle 2s infinite;
 }
+
+@keyframes twinkle{
+0%,100%{opacity:0.2;}
+50%{opacity:1;}
 }
 
 </style>
@@ -168,90 +195,76 @@ opacity:0;
 
 <body>
 
+<!-- INTRO -->
+
+<div class="intro" id="intro">
+<div class="envelope" id="envelope">
+<div class="flap" id="flap"></div>
+<div class="letter">Open</div>
+</div>
+</div>
+
 <!-- HERO -->
 
-<div class="hero">
-
+<div class="hero" id="hero">
 <div class="names">Ram ❤️ Yuktha</div>
-
 <div class="subtitle">We're Getting Engaged</div>
-
 <div class="date">April 12, 2026 • 6:00 PM</div>
-
 <div class="ring">💍</div>
-
-<!-- SCROLL ARROW -->
 <div class="scroll-down">↓</div>
-
 </div>
 
-<!-- COUNTDOWN -->
+<!-- CONTENT -->
 
 <div class="section">
-
-<h2>Countdown to Our Special Day</h2>
-
+<h2>Countdown</h2>
 <div id="countdown" class="countdown"></div>
-
 </div>
 
-<!-- GALLERY -->
-
 <div class="section">
-
-<h2>Our Photos</h2>
-
+<h2>Photos</h2>
 <div class="gallery">
-
 <img src="photo1.jpeg">
 <img src="photo2.jpeg">
-
 </div>
-
 </div>
-
-<!-- STORY -->
 
 <div class="section">
-
-<h2>Our Story</h2>
-
-<p>
-Two hearts met, two souls connected,  
-and now we begin a beautiful journey together.  
-We invite you to celebrate this special moment with us.
-</p>
-
-</div>
-
-<!-- EVENT -->
-
-<div class="section">
-
-<h2>Event Details</h2>
-
+<h2>Event</h2>
 <div class="card">
-
-<p><b>Date:</b> April 12, 2026</p>
-
-<p><b>Time:</b> 6:00 PM onwards</p>
-
-<p><b>Venue:</b> Hotel Sindhu Towers</p>
-
-<iframe
-src="https://maps.google.com/maps?q=hotel%20sindhu%20towers&t=&z=13&ie=UTF8&iwloc=&output=embed"
-width="100%" height="300">
-</iframe>
-
+<p>April 12, 2026 • 6PM</p>
+<p>Hotel Sindhu Towers</p>
+<iframe src="https://maps.google.com/maps?q=hotel%20sindhu%20towers&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="300"></iframe>
 </div>
-
-</div>
-
-<div class="footer">
-We look forward to celebrating this beautiful moment with you 💖
 </div>
 
 <script>
+
+/* OPEN ANIMATION */
+
+document.getElementById("envelope").onclick=function(){
+
+document.getElementById("flap").style.transform="rotateX(180deg)";
+document.querySelector(".letter").style.transform="translateY(-40px)";
+
+setTimeout(()=>{
+document.getElementById("intro").style.display="none";
+
+let hero=document.getElementById("hero");
+hero.style.transform="scale(1)";
+hero.style.opacity="1";
+
+startFlowers();
+startSparkles();
+
+},1000);
+};
+
+/* SCROLL */
+
+document.querySelector(".scroll-down").onclick=function(){
+window.scrollTo({top:window.innerHeight,behavior:"smooth"});
+};
 
 /* COUNTDOWN */
 
@@ -262,49 +275,42 @@ setInterval(function(){
 var now = new Date().getTime();
 var distance = countDownDate - now;
 
-var days = Math.floor(distance/(1000*60*60*24));
-var hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
-var minutes = Math.floor((distance%(1000*60*60))/(1000*60));
-var seconds = Math.floor((distance%(1000*60))/1000);
+var d = Math.floor(distance/(1000*60*60*24));
+var h = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+var m = Math.floor((distance%(1000*60*60))/(1000*60));
+var s = Math.floor((distance%(1000*60))/1000);
 
 document.getElementById("countdown").innerHTML =
-days+" Days "+hours+" Hours "+minutes+" Minutes "+seconds+" Seconds";
+d+"D "+h+"H "+m+"M "+s+"S";
 
 },1000);
 
+/* FLOWERS */
 
-/* SCROLL ON CLICK */
-
-document.querySelector(".scroll-down").addEventListener("click", function(){
-window.scrollTo({
-top: window.innerHeight,
-behavior: "smooth"
-});
-});
-
-
-/* FALLING FLOWERS */
-
-function createFlower(){
-
-let flower=document.createElement("div");
-
-flower.className="flower";
-flower.innerHTML="🌸";
-
-flower.style.left=Math.random()*100+"vw";
-flower.style.animationDuration=(4+Math.random()*4)+"s";
-flower.style.fontSize=(20+Math.random()*15)+"px";
-
-document.body.appendChild(flower);
-
-setTimeout(()=>{
-flower.remove();
-},7000)
-
+function startFlowers(){
+setInterval(()=>{
+let f=document.createElement("div");
+f.className="flower";
+f.innerHTML="🌸";
+f.style.left=Math.random()*100+"vw";
+f.style.animationDuration=(4+Math.random()*4)+"s";
+document.body.appendChild(f);
+setTimeout(()=>f.remove(),7000);
+},400);
 }
 
-setInterval(createFlower,400);
+/* SPARKLES */
+
+function startSparkles(){
+setInterval(()=>{
+let s=document.createElement("div");
+s.className="sparkle";
+s.style.left=Math.random()*100+"vw";
+s.style.top=Math.random()*100+"vh";
+document.body.appendChild(s);
+setTimeout(()=>s.remove(),2000);
+},200);
+}
 
 </script>
 
