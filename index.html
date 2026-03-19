@@ -70,7 +70,7 @@ font-size:20px;
 font-size:16px;
 }
 
-/* ⬇️ SCROLL BUTTON */
+/* SCROLL BUTTON */
 
 .scroll-btn{
 position:absolute;
@@ -82,22 +82,28 @@ border-radius:25px;
 cursor:pointer;
 font-size:15px;
 box-shadow:0 5px 15px rgba(0,0,0,0.4);
+animation:bounce 2s infinite;
+}
+
+@keyframes bounce{
+0%,100%{transform:translateY(0);}
+50%{transform:translateY(10px);}
 }
 
 /* SECTION */
 
 .section{
-padding:40px 15px;
+padding:35px 15px;
 max-width:900px;
 margin:auto;
 }
 
-/* 🎬 FADE ANIMATION */
+/* FADE */
 
 .fade-section{
 opacity:0;
 transform:translateY(40px);
-transition:all 1s ease;
+transition:1s;
 }
 
 .fade-section.show{
@@ -118,7 +124,7 @@ line-height:1.6;
 color:#ddd;
 }
 
-/* 📸 GALLERY */
+/* GALLERY */
 
 .gallery{
 display:flex;
@@ -167,17 +173,26 @@ color:#eee;
 
 .whatsapp-btn{
 position:fixed;
-bottom:15px;
-right:15px;
+bottom:20px;
+right:20px;
 background:#25D366;
 color:white;
-padding:10px 15px;
-border-radius:25px;
+padding:12px 18px;
+border-radius:30px;
 font-size:14px;
 text-decoration:none;
+box-shadow:0 5px 15px rgba(0,0,0,0.4);
+font-weight:bold;
+animation:pulse 2s infinite;
 }
 
-/* 🔊 MUSIC BUTTON */
+@keyframes pulse{
+0%{transform:scale(1);}
+50%{transform:scale(1.05);}
+100%{transform:scale(1);}
+}
+
+/* MUSIC BUTTON */
 
 .music-btn{
 position:fixed;
@@ -188,17 +203,15 @@ color:#000;
 padding:10px 15px;
 border-radius:20px;
 cursor:pointer;
-font-size:14px;
 }
 
-/* 🌸 FLOWERS */
+/* FLOWERS */
 
 .flower{
 position:fixed;
 top:-10px;
 font-size:20px;
 animation:fall linear infinite;
-opacity:0.8;
 }
 
 @keyframes fall{
@@ -224,7 +237,7 @@ opacity:0.8;
 <div class="hero" id="hero">
 <div class="names">Ram ❤️ Yuktha</div>
 <div class="subtitle">We're Getting Engaged</div>
-<div class="date">April 12, 2026 • 10:00 AM</div>
+<div class="date">April 12, 2026 • 6:00 PM</div>
 
 <div class="scroll-btn" onclick="scrollNext()">⬇ Scroll Down</div>
 </div>
@@ -242,8 +255,7 @@ opacity:0.8;
 <h2>Our Story ❤️</h2>
 <p class="story">
 Two hearts met and found a forever in each other.  
-With love and happiness, we invite you  
-to celebrate this beautiful beginning with us.
+With love and happiness, we invite you to celebrate this beautiful beginning with us.
 </p>
 </div>
 
@@ -251,22 +263,19 @@ to celebrate this beautiful beginning with us.
 
 <div class="section fade-section">
 <h2>Our Moments 📸</h2>
-
 <div class="gallery">
 <img src="photo1.jpeg">
 <img src="photo2.jpeg">
 </div>
-
 </div>
 
 <!-- EVENT -->
 
 <div class="section fade-section">
 <h2>Event Details</h2>
-
 <div class="card">
 <p><b>Date:</b> April 12, 2026</p>
-<p><b>Time:</b> 10:00 AM onwards</p>
+<p><b>Time:</b> 6:00 PM onwards</p>
 <p><b>Venue:</b> Hotel Sindhu Towers</p>
 
 <a href="https://maps.app.goo.gl/Dyys4CopRbk1stgD9" target="_blank" class="map-btn">
@@ -274,36 +283,30 @@ to celebrate this beautiful beginning with us.
 </a>
 
 </div>
-
 </div>
 
-<!-- FINAL MESSAGE -->
+<!-- FINAL -->
 
 <div class="section fade-section">
 <h2>With Love ❤️</h2>
-
 <p class="final-msg">
-Your presence will make our day even more special.  
-Join us as we celebrate love, togetherness, and a new beginning ✨
+Join us to celebrate love, laughter, and a new beginning ✨
 </p>
-
 </div>
 
 <!-- WHATSAPP -->
 
 <a href="https://wa.me/916303850729?text=Hi%20I%20have%20a%20question" 
 target="_blank" class="whatsapp-btn">
-💬 Chat
+💬 Need Help? Chat with Us
 </a>
 
-<!-- 🔊 MUSIC BUTTON -->
+<!-- MUSIC -->
 
 <div class="music-btn" onclick="toggleMusic()">🔊</div>
 
-<!-- 🎵 AUDIO -->
-
-<audio id="bgm" loop>
-  <source src="music.mp3" type="audio/mp3">
+<audio id="bgm" loop preload="auto">
+<source src="music.mp3" type="audio/mpeg">
 </audio>
 
 <script>
@@ -317,78 +320,95 @@ let hero=document.getElementById("hero");
 hero.style.opacity="1";
 hero.style.transform="scale(1)";
 
-document.getElementById("bgm").play(); // 🎵 start music
-
+playMusic();
 startFlowers();
+}
+
+/* MUSIC */
+
+function playMusic(){
+let music=document.getElementById("bgm");
+music.play().catch(()=>{});
+}
+
+document.addEventListener("click", function(){
+let music=document.getElementById("bgm");
+if(music.paused){
+music.play();
+}
+},{once:true});
+
+function toggleMusic(){
+let music=document.getElementById("bgm");
+music.paused ? music.play() : music.pause();
 }
 
 /* SCROLL */
 
 function scrollNext(){
-document.getElementById("next").scrollIntoView({
-behavior:"smooth"
-});
-}
-
-/* MUSIC TOGGLE */
-
-function toggleMusic(){
-let music=document.getElementById("bgm");
-
-if(music.paused){
-music.play();
-}else{
-music.pause();
-}
+document.getElementById("next").scrollIntoView({behavior:"smooth"});
 }
 
 /* COUNTDOWN */
 
-var countDownDate = new Date("Apr 12, 2026 18:00:00").getTime();
+var countDownDate=new Date("Apr 12, 2026 18:00:00").getTime();
 
 setInterval(function(){
-var now = new Date().getTime();
-var d = countDownDate - now;
+let now=new Date().getTime();
+let d=countDownDate-now;
 
-document.getElementById("countdown").innerHTML =
+document.getElementById("countdown").innerHTML=
 Math.floor(d/86400000)+" Days "+
 Math.floor((d%86400000)/3600000)+" H "+
 Math.floor((d%3600000)/60000)+" M "+
 Math.floor((d%60000)/1000)+" S";
-
 },1000);
 
-/* 🌸 FLOWERS */
+/* FLOWERS */
 
 function startFlowers(){
 setInterval(()=>{
-let flower=document.createElement("div");
-flower.className="flower";
-flower.innerHTML="🌸";
+let f=document.createElement("div");
+f.className="flower";
+f.innerHTML="🌸";
 
-flower.style.left=Math.random()*100+"vw";
-flower.style.animationDuration=(4+Math.random()*4)+"s";
-flower.style.fontSize=(18+Math.random()*10)+"px";
+f.style.left=Math.random()*100+"vw";
+f.style.animationDuration=(4+Math.random()*4)+"s";
 
-document.body.appendChild(flower);
+document.body.appendChild(f);
 
-setTimeout(()=>flower.remove(),7000);
-
+setTimeout(()=>f.remove(),7000);
 },400);
 }
 
-/* 🎬 FADE */
+/* FADE */
 
-const observer = new IntersectionObserver(entries => {
-entries.forEach(entry => {
-if(entry.isIntersecting){
-entry.target.classList.add('show');
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(e=>{
+if(e.isIntersecting){
+e.target.classList.add("show");
 }
 });
 });
 
-document.querySelectorAll('.fade-section').forEach(section => {
-observer.observe(section);
+document.querySelectorAll(".fade-section").forEach(s=>{
+observer.observe(s);
+});
+
+/* SPARKLE */
+
+document.addEventListener("mousemove", function(e){
+let sparkle=document.createElement("div");
+sparkle.innerHTML="✨";
+
+sparkle.style.position="fixed";
+sparkle.style.left=e.clientX+"px";
+sparkle.style.top=e.clientY+"px";
+sparkle.style.pointerEvents="none";
+
+document.body.appendChild(sparkle);
+
+setTimeout(()=>sparkle.remove(),500);
 });
 
 </script>
