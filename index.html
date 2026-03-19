@@ -21,8 +21,6 @@ overflow-x:hidden;
 
 .intro{
 position:fixed;
-top:0;
-left:0;
 width:100%;
 height:100%;
 background:#0a1b3d;
@@ -46,8 +44,7 @@ position:absolute;
 width:100%;
 height:100%;
 background:#e6c200;
-clip-path:polygon(0 0, 100% 0, 50% 50%);
-transform-origin:top;
+clip-path:polygon(0 0,100% 0,50% 50%);
 transition:1s;
 }
 
@@ -60,10 +57,9 @@ height:100px;
 background:white;
 color:black;
 display:flex;
-justify-content:center;
 align-items:center;
+justify-content:center;
 font-weight:bold;
-transition:1s;
 }
 
 /* HERO */
@@ -75,7 +71,6 @@ display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
-position:relative;
 transform:scale(1.2);
 opacity:0;
 transition:1s;
@@ -105,34 +100,19 @@ animation:spin 6s linear infinite;
 100%{transform:rotate(360deg);}
 }
 
-/* PREMIUM SCROLL INDICATOR */
+/* SCROLL INDICATOR */
 
 .scroll-down{
 position:absolute;
 bottom:30px;
-width:30px;
-height:50px;
-border:2px solid white;
-border-radius:20px;
-display:flex;
-justify-content:center;
-align-items:flex-start;
-cursor:pointer;
+font-size:14px;
+color:#fff;
+animation:fade 2s infinite;
 }
 
-.scroll-down span{
-width:6px;
-height:6px;
-background:white;
-border-radius:50%;
-margin-top:8px;
-animation:scrollAnim 1.5s infinite;
-}
-
-@keyframes scrollAnim{
-0%{opacity:0; transform:translateY(0);}
+@keyframes fade{
+0%,100%{opacity:0.3;}
 50%{opacity:1;}
-100%{opacity:0; transform:translateY(20px);}
 }
 
 /* SECTION */
@@ -148,27 +128,58 @@ font-size:40px;
 color:#FFD700;
 }
 
-/* INSTAGRAM GALLERY */
+/* HEARTFUL TEXT */
+
+.story{
+font-size:18px;
+line-height:1.8;
+max-width:700px;
+margin:auto;
+color:#ddd;
+}
+
+/* GALLERY */
+
+.gallery-wrapper{
+position:relative;
+}
 
 .insta-gallery{
 display:flex;
 overflow-x:auto;
-scroll-snap-type:x mandatory;
 gap:20px;
 padding:20px;
-}
-
-.insta-gallery::-webkit-scrollbar{
-display:none;
+scroll-behavior:smooth;
 }
 
 .insta-gallery img{
 min-width:80%;
 height:400px;
-object-fit:cover;
 border-radius:20px;
-scroll-snap-align:center;
-box-shadow:0 10px 25px rgba(0,0,0,0.6);
+object-fit:cover;
+}
+
+/* ARROWS */
+
+.arrow{
+position:absolute;
+top:50%;
+transform:translateY(-50%);
+font-size:30px;
+background:rgba(0,0,0,0.4);
+padding:10px;
+cursor:pointer;
+}
+
+.left{left:10px;}
+.right{right:10px;}
+
+/* HINT TEXT */
+
+.swipe-hint{
+font-size:14px;
+color:#ccc;
+margin-top:-10px;
 }
 
 /* CARD */
@@ -181,36 +192,7 @@ max-width:400px;
 margin:auto;
 }
 
-/* FLOWERS */
-
-.flower{
-position:fixed;
-top:-10px;
-font-size:22px;
-animation:fall linear infinite;
-}
-
-@keyframes fall{
-100%{transform:translateY(110vh);}
-}
-
-/* SPARKLES */
-
-.sparkle{
-position:fixed;
-width:5px;
-height:5px;
-background:white;
-border-radius:50%;
-animation:twinkle 2s infinite;
-}
-
-@keyframes twinkle{
-0%,100%{opacity:0.2;}
-50%{opacity:1;}
-}
-
-/* WHATSAPP BUTTON */
+/* WHATSAPP */
 
 .whatsapp-btn{
 position:fixed;
@@ -218,16 +200,11 @@ bottom:20px;
 right:20px;
 background:#25D366;
 color:white;
-font-size:28px;
-width:55px;
-height:55px;
-display:flex;
-align-items:center;
-justify-content:center;
-border-radius:50%;
-box-shadow:0 5px 15px rgba(0,0,0,0.4);
-z-index:999;
+padding:12px 18px;
+border-radius:30px;
+font-size:16px;
 text-decoration:none;
+box-shadow:0 5px 15px rgba(0,0,0,0.4);
 }
 
 </style>
@@ -238,7 +215,7 @@ text-decoration:none;
 <!-- INTRO -->
 
 <div class="intro" id="intro">
-<div class="envelope" id="envelope">
+<div class="envelope" onclick="openInvite()">
 <div class="flap" id="flap"></div>
 <div class="letter">Open</div>
 </div>
@@ -251,8 +228,7 @@ text-decoration:none;
 <div class="subtitle">We're Getting Engaged</div>
 <div class="date">April 12, 2026 • 6:00 PM</div>
 <div class="ring">💍</div>
-
-<div class="scroll-down"><span></span></div>
+<div class="scroll-down">⬇ Scroll Down</div>
 </div>
 
 <!-- COUNTDOWN -->
@@ -262,68 +238,76 @@ text-decoration:none;
 <div id="countdown" class="countdown"></div>
 </div>
 
+<!-- STORY -->
+
+<div class="section">
+<h2>Our Story ❤️</h2>
+<p class="story">
+Two beautiful souls found each other,  
+and in that moment, life became a journey of love, laughter, and forever.  
+With immense joy in our hearts, we invite you  
+to be a part of our special day and bless us.
+</p>
+</div>
+
 <!-- GALLERY -->
 
 <div class="section">
-<h2>Our Photos</h2>
-<div class="insta-gallery">
+<h2>Our Moments 📸</h2>
+
+<div class="gallery-wrapper">
+
+<div class="arrow left" onclick="scrollGallery(-1)">❮</div>
+
+<div class="insta-gallery" id="gallery">
 <img src="photo1.jpeg">
 <img src="photo2.jpeg">
 <img src="photo3.jpeg">
 </div>
+
+<div class="arrow right" onclick="scrollGallery(1)">❯</div>
+
+</div>
+
+<div class="swipe-hint">👉 Swipe or use arrows to view more</div>
+
 </div>
 
 <!-- EVENT -->
 
 <div class="section">
-<h2>Event</h2>
+<h2>Event Details</h2>
+
 <div class="card">
 <p>April 12, 2026 • 6PM</p>
 <p>Hotel Sindhu Towers</p>
 
 <a href="https://maps.app.goo.gl/Dyys4CopRbk1stgD9" target="_blank">
-<iframe
-src="https://maps.google.com/maps?q=hotel%20sindhu%20towers&t=&z=13&ie=UTF8&iwloc=&output=embed"
-width="100%" height="300"
-style="pointer-events:none;">
-</iframe>
+<iframe src="https://maps.google.com/maps?q=hotel%20sindhu%20towers&output=embed"
+width="100%" height="300" style="pointer-events:none;"></iframe>
 </a>
 
 </div>
+
 </div>
 
 <!-- WHATSAPP -->
 
-<a href="https://wa.me/916303850729?text=Hi%20I%20have%20a%20question%20regarding%20the%20engagement" 
-target="_blank" class="whatsapp-btn">💬</a>
+<a href="https://wa.me/916303850729?text=Hi%20I%20have%20a%20question" 
+target="_blank" class="whatsapp-btn">
+💬 Chat with us
+</a>
 
 <script>
 
 /* OPEN */
 
-document.getElementById("envelope").onclick=function(){
-
-document.getElementById("flap").style.transform="rotateX(180deg)";
-document.querySelector(".letter").style.transform="translateY(-40px)";
-
-setTimeout(()=>{
+function openInvite(){
 document.getElementById("intro").style.display="none";
-
 let hero=document.getElementById("hero");
-hero.style.transform="scale(1)";
 hero.style.opacity="1";
-
-startFlowers();
-startSparkles();
-
-},1000);
-};
-
-/* SCROLL */
-
-document.querySelector(".scroll-down").onclick=function(){
-window.scrollTo({top:window.innerHeight,behavior:"smooth"});
-};
+hero.style.transform="scale(1)";
+}
 
 /* COUNTDOWN */
 
@@ -341,31 +325,11 @@ Math.floor((d%60000)/1000)+"S";
 
 },1000);
 
-/* FLOWERS */
+/* GALLERY SCROLL */
 
-function startFlowers(){
-setInterval(()=>{
-let f=document.createElement("div");
-f.className="flower";
-f.innerHTML="🌸";
-f.style.left=Math.random()*100+"vw";
-f.style.animationDuration=(4+Math.random()*4)+"s";
-document.body.appendChild(f);
-setTimeout(()=>f.remove(),7000);
-},400);
-}
-
-/* SPARKLES */
-
-function startSparkles(){
-setInterval(()=>{
-let s=document.createElement("div");
-s.className="sparkle";
-s.style.left=Math.random()*100+"vw";
-s.style.top=Math.random()*100+"vh";
-document.body.appendChild(s);
-setTimeout(()=>s.remove(),2000);
-},200);
+function scrollGallery(dir){
+let g=document.getElementById("gallery");
+g.scrollBy({left:dir*300,behavior:'smooth'});
 }
 
 </script>
